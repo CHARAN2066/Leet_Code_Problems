@@ -28,7 +28,7 @@ public:
                 if(temp->right!=NULL)
                 q.push(temp->right);
             }
-            cout<<s<<endl;
+            // cout<<s<<endl;
             if(ans<s){
                 ans=s;
                 id=level;
