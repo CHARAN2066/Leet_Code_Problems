@@ -25,10 +25,10 @@ public:
         t=findFactor(nums[0]);
         vector<int> temp=findFactor(k);
         long long int ac=(pow(2,temp[0])*pow(3,temp[1])*pow(5,temp[2]));
-        cout<<ac<<endl;
+        // cout<<ac<<endl;
         if(ac!=k)
         return 0;
-        cout<<endl;
+        // cout<<endl;
         dp[0][{{a-t[0],b-t[1]},c-t[2]}]++;
         dp[0][{{a+t[0],b+t[1]},c+t[2]}]++;
         dp[0][{{0,0},0}]++;
