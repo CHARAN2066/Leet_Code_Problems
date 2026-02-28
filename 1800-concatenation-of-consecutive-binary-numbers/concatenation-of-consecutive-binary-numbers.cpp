@@ -1,12 +1,12 @@
 class Solution {
 public:
     int concatenatedBinary(int n) {
-        long long int b,a=1,mod=1e9+7;
+        long long int b=1,a=1,mod=1e9+7;
         for(int i=2;i<=n;i++){
-            b=(log2(i)+1);
+            if((i&(i-1))==0)
+            b++;
             a=(a<<b);
             a=(a+i)%mod;
-            // cout<<a<<endl;
         }
         return a;
     }
