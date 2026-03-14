@@ -1,28 +1,31 @@
 class Solution {
 public:
-	void helper(string temp,vector<string> &ans,int i,int n,char pre)  {
-		if(i==n)
-		{
-			ans.push_back(temp);
-			return;
-		}
-		for(char j='a';j<='c';j++)
-		{
-			if(j==pre)
-				continue;
-			temp[i]=j;
-			helper(temp,ans,i+1,n,j);
-		}
-		return;
-	}
+    string ans;
+    int times;
+    void helper(int n,string t,char pre){
+        if(n==0){
+            if(times>0){
+                ans=t;
+                times--;
+            }
+            return;
+        }
+        for(char c='a';c<='c';c++){
+            if(pre!=c)
+            {
+                t.push_back(c);
+                helper(n-1,t,c);
+                t.pop_back();
+            }
+        }
+        return;
+    }
     string getHappyString(int n, int k) {
-    	string temp;
-    	temp.resize(n);
-    	vector<string> ans;
-    	helper(temp,ans,0,n,'*');
-    	if(ans.size()<k)
-    		return "";
-    	else
-    	return ans[k-1];
+        times=k;
+        string t="";
+        helper(n,t,'d');
+        if(times!=0)
+        return "";
+        return ans;
     }
 };
