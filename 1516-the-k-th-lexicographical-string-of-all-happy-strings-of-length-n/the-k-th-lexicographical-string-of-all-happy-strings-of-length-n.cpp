@@ -3,6 +3,8 @@ public:
     string ans;
     int times;
     void helper(int n,string t,char pre){
+        if(times==0)
+        return;
         if(n==0){
             if(times>0){
                 ans=t;
