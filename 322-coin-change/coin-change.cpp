@@ -1,33 +1,27 @@
 class Solution {
 public:
-    int coinChange(vector<int>& coins, int amount) {
-        map<int,bool> mp;
-        if(amount==0)
+    int helper(vector<int> &coins,int i,int n,int amount,int curr,vector<vector<int>> &dp){
+        if(curr>amount)
+        return 1e5;
+        if(curr==amount)
         return 0;
+        if(i==n)
+        return INT_MAX;
+        if(dp[i][curr]!=-1)
+        return dp[i][curr];
+        if(coins[i]>amount)
+        return 1e5;
+        int a=helper(coins,i,n,amount,curr+coins[i],dp);
+        int b=helper(coins,i+1,n,amount,curr,dp);
+        return dp[i][curr]=min(a+1,b);
+    }
+    int coinChange(vector<int>& coins, int amount) {
         int n=coins.size();
-        for(auto i:coins){
-            mp[i]=true;
-        }
-        vector<int> dp(amount+1,INT_MAX);
-        if(mp.find(1)!=mp.end())
-        dp[1]=1;
-        else
-        dp[1]=INT_MAX;
-        for(int i=2;i<=amount;i++){
-            if(mp.find(i)!=mp.end())
-            dp[i]=1;
-            for(int j=0;j<n;j++){
-                if(coins[j]<i&&dp[i-coins[j]]!=INT_MAX)
-                dp[i]=min(dp[i-coins[j]]+1,dp[i]);
-            }
-        }
-        // for(auto i:dp)
-        // cout<<i<<" ";
-        // cout<<endl;
-        // cout<<dp[amount];
-        if(dp[amount]==INT_MAX)
+        vector<vector<int>> dp(n,vector<int>(amount+1,-1));
+        sort(coins.begin(),coins.end());
+        int ans=helper(coins,0,n,amount,0,dp);
+        if(ans>=1e5)
         return -1;
-        else
-        return dp[amount];
+        return ans;
     }
 };
