@@ -14,13 +14,15 @@ public:
             if((digits[i]>digits[i+1]&&digits[i]>digits[i-1])||(digits[i]<digits[i+1]&&digits[i]<digits[i-1]))
             ans++;
         }
-        return ans++;
+        return ans;
     }
     int totalWaviness(int num1, int num2) {
         int ans=0;
+        if(num2<=99)
+        return 0;
+        if(num1<=99)
+        num1=100;
         for(int i=num1;i<=num2;i++){
-            if(i<=99)
-            continue;
             ans+=fun(i);
         }
         return ans;
