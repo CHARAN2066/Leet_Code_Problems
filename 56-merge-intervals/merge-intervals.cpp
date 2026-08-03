@@ -1,18 +1,27 @@
 class Solution {
 public:
     vector<vector<int>> merge(vector<vector<int>>& intervals) {
-        vector<vector<int>> ans;
         sort(intervals.begin(), intervals.end());
-        ans.push_back({intervals[0][0], intervals[0][1]});
-        int s, n = intervals.size();
+        int n = intervals.size(), a = 0; 
+        // for (auto i:intervals) {
+        //     cout<< i[0]<< " "<< i[1]<<endl;
+        // }
         for (int i = 1; i < n; i++) {
-            // cout<<'s';
-            s = ans.size();
-            if (ans[s - 1][1] >= intervals[i][0]) {
-                ans[s - 1][1] = max(ans[s - 1][1], intervals[i][1]);
+            if (intervals[a][1] >= intervals[i][0]) {
+                // cout<<"s";
+                intervals[a][1] = max(intervals[i][1], intervals[a][1]);
+                intervals[i][0] = -1;
+                intervals[i][1] = -1;
             }
-            else
-            ans.push_back({intervals[i][0], intervals[i][1]});
+            else {
+                a = i;
+            }
+        }
+        vector<vector<int>> ans;
+        for (auto i:intervals) {
+            if (i[0] == -1 && i[1] == -1)
+            continue;
+            ans.push_back({i[0], i[1]});
         }
         return ans;
     }
