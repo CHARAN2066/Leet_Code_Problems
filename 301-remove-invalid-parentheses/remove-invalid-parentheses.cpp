@@ -60,7 +60,7 @@ public:
                 if (visted[curr])
                 continue;
                 visted[curr] = true;
-                cout<<curr<<" ";
+                // cout<<curr<<" ";
                 if (check(curr)) {
                     ans.push_back(curr);
                     continue;
@@ -74,7 +74,7 @@ public:
                     q.push(new_string);
                 }
             }
-            cout<<endl;
+            // cout<<endl;
             if (ans.size() > 0)
             break;
         }
