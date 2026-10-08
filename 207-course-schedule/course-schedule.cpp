@@ -1,40 +1,31 @@
 class Solution {
 public:
-    bool canFinish(int n, vector<vector<int>>& edges) {
-        queue<int> q;
-        vector<int> indegree(n);
-        vector<int> ans;
+    bool canFinish(int n, vector<vector<int>>& prerequisites) {
         vector<vector<int>> adj(n);
-        for(auto i:edges)
-        {
+        vector<int> indegree(n, 0);
+        for (auto i:prerequisites) {
             adj[i[0]].push_back(i[1]);
-        }
-        for(auto i:edges)
-        {
             indegree[i[1]]++;
         }
-        for(int i=0;i<n;i++)
-        {
-            if(indegree[i]==0)
+        queue<int> q;
+        for (int i = 0; i < n; i++) {
+            if (indegree[i] == 0)
             q.push(i);
         }
-        int t;
-        while(!q.empty())
-        {
-            t=q.front();
-            ans.push_back(t);
-            for(auto i:adj[t])
-            {
-                indegree[i]--;
-                if(indegree[i]==0)
-                q.push(i);
-            }
+        int a;
+        vector<int> ans;
+        while (!q.empty()) {
+            a = q.front();
             q.pop();
+            ans.push_back(a);
+            for (auto i:adj[a]) {
+                indegree[i]--;
+                if (indegree[i] == 0)
+                    q.push(i);
+            }
         }
-        reverse(ans.begin(),ans.end());
-        if(ans.size()!=n)
-        return false;
-        else
+        if (ans.size() == n)
         return true;
+        return false;
     }
 };
