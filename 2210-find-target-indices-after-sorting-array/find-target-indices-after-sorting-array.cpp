@@ -8,7 +8,7 @@ public:
             if (i == target)
             b++;
        }
-       cout<<a<<" "<<b<<endl;
+    //    cout<<a<<" "<<b<<endl;
        vector<int> ans;
        for (int i = 1; i <= b; i++)
        ans.push_back(i + a - 1);
