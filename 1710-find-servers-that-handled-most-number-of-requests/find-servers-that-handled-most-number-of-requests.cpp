@@ -37,7 +37,7 @@ public:
         n=ans.size();
         for(int i=0;i<n;i++)
         {
-            cout<<ans[i]<<" ";
+            // cout<<ans[i]<<" ";
             m=max(m,ans[i]);
         }
         vector<int> res;
