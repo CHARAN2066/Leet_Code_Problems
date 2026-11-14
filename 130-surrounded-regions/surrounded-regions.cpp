@@ -39,7 +39,7 @@ public:
                 if(board[i][j]=='O'){
                     vector<vector<bool>> visted(n,vector<bool> (m,false));
                     if(helper(board,i,j,n,m,visted)){
-                        cout<<i<<j<<endl;
+                        // cout<<i<<j<<endl;
                         helper2(board,i,j,n,m);
                     }
                 }
