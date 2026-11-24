@@ -24,7 +24,7 @@ public:
         }
         int ans = 0;
         for (int i = 1; i < dis.size(); i++) {
-            cout<<dis[i]<<" ";
+            // cout<<dis[i]<<" ";
             if (dis[i] == INT_MAX)
             return -1;
             ans = max(ans, dis[i]);
