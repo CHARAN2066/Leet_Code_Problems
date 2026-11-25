@@ -5,7 +5,7 @@ public:
         queue<pair<int, vector<int>>> q;
         vector<int> temp;
         temp.push_back(0);
-        vector<bool> visted(n, false);
+        // vector<bool> visted(n, false);
         int node;
         vector<vector<int>> ans;
         q.push({0, temp});
@@ -16,8 +16,8 @@ public:
             if (node == n - 1) {
                 ans.push_back(temp);
             }
-            if (visted[node])
-            continue;
+            // if (visted[node])
+            // continue;
             // visted[node] = true;
             // cout<<node<<"->";
             for (auto j:graph[node]) {
