@@ -1,42 +1,30 @@
 class Solution {
 public:
-    map<int, int> mp;
-    bool dfs(vector<vector<int>>& graph, int curr, vector<bool>& visted) {
-        if (mp[curr] == 1)
-        return true;
-        if (visted[curr])
-        return false;
-        visted[curr] = true;
-        bool a = true;
-        for (auto i:graph[curr]) {
-            // if (i == curr)
-            // continue;
-            // if (curr == 3)
-            // cout<<i<<endl;
-            a = a & dfs(graph, i, visted);
-        }
-        if (a) {
-            mp[curr] = 1;
-        }
-        // visted[curr] = false;
-        return a;
-    }
     vector<int> eventualSafeNodes(vector<vector<int>>& graph) {
         int n = graph.size();
         vector<int> ans;
-        vector<bool> visted(n, false);
+        vector<int> outdegree(n, 0);
+        queue<int> q;
         for (int i = 0; i < n; i++) {
-            if (mp[i] == 1)
-            {
-                // cout<<"s";
-                continue;
-            }
-            // cout<<i<<endl;
-            dfs(graph, i, visted);
+            outdegree[i] = (graph[i].size());
+            if (outdegree[i] == 0)
+            q.push(i);
         }
-        for (auto i:mp) {
-            if (i.second == 1) {
-                ans.push_back(i.first);
+        vector<vector<int>> adj(n);
+        for (int i = 0; i < n; i++) {
+            for (auto j:graph[i])
+            adj[j].push_back(i);
+        }
+        int node;
+        while (!q.empty()) {
+            node = q.front();
+            // cout<<node<<endl;
+            ans.push_back(node);
+            q.pop();
+            for (auto i:adj[node]) {
+                outdegree[i]--;
+                if (outdegree[i] == 0)
+                q.push(i);
             }
         }
         sort(ans.begin(), ans.end());
